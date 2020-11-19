@@ -4,6 +4,7 @@
 #
 #  id              :integer          not null, primary key
 #  email           :string
+#  flights_count   :integer          default(0)
 #  password_digest :string
 #  phone_number    :string
 #  created_at      :datetime         not null
