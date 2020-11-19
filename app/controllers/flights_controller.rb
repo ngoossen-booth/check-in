@@ -4,6 +4,10 @@ class FlightsController < ApplicationController
 
     matching_flights = @current_user.flights
 
+    @upcoming_flights = matching_flights.where("departs_at > ?", Time.now)
+
+    @past_flights = matching_flights.where("departs_at <= ?", Time.now)
+
     @list_of_flights = matching_flights.order({ :created_at => :desc })
 
     render({ :template => "flights/index.html.erb" })
@@ -21,7 +25,7 @@ class FlightsController < ApplicationController
 
   def create
     the_flight = Flight.new
-    the_flight.user_id = params.fetch("query_user_id")
+    the_flight.user_id = @current_user.id#params.fetch("query_user_id")
     the_flight.description = params.fetch("query_description")
     the_flight.departs_at = params.fetch("query_departs_at")
     the_flight.alert_sent = params.fetch("query_alert_sent", false)

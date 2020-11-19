@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Check In</title>
+    <%= csrf_meta_tags %>
+
+    <!-- Expand the number of characters we can use in the document beyond basic ASCII 🎉 -->
+    <meta charset="utf-8">
+
+    <!-- Make it responsive to small screens -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag 'application', media: 'all' %>
+
+  </head>
+
+  <body>
+  <ul>
+  <% if @current_user == nil %>
+  <li>
+  <a href="/user_sign_in">Sign In</li>
+  
+  <li>
+  <a href="/user_sign_up">Sign Up</a>
+  </li>
+
+  <% else%>
+  
+  <li>
+  <a href="/edit_user_profile">Edit <%=@current_user.email%>'s User Profile</a>
+  </li>
+  
+  <li>
+    <a href="/user_sign_out">Sign out</a>
+  </li>
+
+  <% end %>
+  </ul>
+
+  <p style="color: green"><%= notice%></p>
+
+  <p style="color: red"><%= alert%></p>
+
+
+    <%= yield %>
+  </body>
+</html>
